@@ -1,400 +1,243 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moon Rabbit</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MoonRabbit</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+:root{
+  --bg:#05050a;
+  --text:#f4f4f6;
+  --muted:#b7b7c6;
+  --accent:#8aa2ff;
+  --glow:#5de0ff;
+  --card:rgba(255,255,255,.05);
+  --border:rgba(255,255,255,.12);
 }
 
-body {
-  background: radial-gradient(ellipse at top, #0a0f2c 0%, #05050a 60%);
-  color: #f4f4f6;
-  font-family: "Inter", system-ui, sans-serif;
-  line-height: 1.7;
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family: system-ui, -apple-system, Inter, sans-serif;
+  background: radial-gradient(circle at top, #0a0f2c, var(--bg));
+  color: var(--text);
+  line-height:1.7;
 }
 
-a {
-  color: #8aa2ff;
-  text-decoration: none;
+/* HERO */
+.hero{
+  min-height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:48px 24px;
+  overflow:hidden;
 }
-
-a:hover {
-  text-shadow: 0 0 8px rgba(138,162,255,0.6);
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to bottom, rgba(5,5,10,.3), rgba(5,5,10,.85)),
+    url("hero.jpg") center/cover no-repeat;
 }
-
-/* SECTION WRAPPER */
-.section {
-  max-width: 1100px;
-  margin: 120px auto;
-  padding: 32px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 20px;
-  border: 1px solid rgba(255,255,255,0.12);
+.hero-inner{
+  position:relative;
+  z-index:1;
+  max-width:900px;
 }
-
-/* NEON HEADINGS */
-.section h2 {
-  font-size: 36px;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
+.hero h1{
+  font-size:clamp(42px,7vw,86px);
+  letter-spacing:8px;
+  text-transform:uppercase;
   text-shadow:
-    0 0 6px rgba(138,162,255,0.45),
-    0 0 18px rgba(93,224,255,0.25),
-    0 0 36px rgba(93,224,255,0.15);
+    0 0 10px rgba(138,162,255,.4),
+    0 0 40px rgba(93,224,255,.25);
+}
+.hero p{
+  margin-top:14px;
+  letter-spacing:3px;
+  color:var(--muted);
+}
+
+/* NAV */
+.nav{
+  margin-top:36px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.nav a{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  color:var(--text);
+  text-decoration:none;
+  text-transform:uppercase;
+  font-size:13px;
+  letter-spacing:2px;
+  transition:.25s;
+}
+.nav a:hover{
+  border-color:var(--accent);
+  box-shadow:0 0 18px rgba(138,162,255,.35);
+  transform:translateY(-1px);
+}
+
+/* SECTIONS */
+.section{
+  max-width:1100px;
+  margin:120px auto;
+  padding:32px;
+  background:var(--card);
+  border-radius:22px;
+  border:1px solid var(--border);
+}
+.section h2{
+  font-size:34px;
+  letter-spacing:6px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+  text-shadow:
+    0 0 6px rgba(138,162,255,.45),
+    0 0 24px rgba(93,224,255,.25);
 }
 
 /* LORE IMAGE */
-.section img {
-  width: 100%;
-  border-radius: 16px;
-  margin: 24px 0;
+.section img{
+  width:100%;
+  border-radius:18px;
+  margin:22px 0;
+}
+
+/* TOKENOMICS */
+.token-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
+.token-item{
+  padding:18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+}
+
+/* LINKS */
+.links{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.links a{
+  padding:12px 18px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  text-decoration:none;
+  color:var(--text);
+  transition:.25s;
+}
+.links a:hover{
+  border-color:var(--accent);
+  box-shadow:0 0 16px rgba(138,162,255,.35);
+}
+
+/* GALLERY */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+.gallery img{
+  width:100%;
+  height:220px;
+  object-fit:cover;
+  border-radius:16px;
+  border:1px solid var(--border);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px 16px;
+  color:rgba(255,255,255,.45);
+  font-size:12px;
 }
 </style>
-
-
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
-      background: radial-gradient(900px 500px at 50% -10%, rgba(138,162,255,.18), transparent 60%),
-                  radial-gradient(700px 400px at 80% 25%, rgba(93,224,255,.12), transparent 55%),
-                  linear-gradient(180deg, #05050a, #070713);
-      color:var(--text);
-    }
-
-    /* HERO */
-    .hero{
-      min-height: 100vh;
-      position: relative;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
-      padding: 24px;
-    }
-
-    /* background image */
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background-image: url("hero.jpg"); /* <-- rename your main image to hero.jpg */
-      background-size: cover;
-      background-position: center;
-      filter: saturate(1.05) contrast(1.05);
-      transform: scale(1.03);
-    }
-
-    /* dark overlay */
-    .hero::after{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(800px 500px at 50% 20%, rgba(93,224,255,.18), transparent 60%),
-        radial-gradient(900px 600px at 50% 70%, rgba(138,162,255,.12), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,.72));
-    }
-
-    .hero-inner{
-      position:relative;
-      width:min(1100px, 92vw);
-      text-align:center;
-      z-index:1;
-    }
-
-    h1{
-      margin:0;
-      font-size: clamp(40px, 6vw, 78px);
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      line-height: 1.02;
-      text-shadow: 0 12px 40px rgba(0,0,0,.55);
-    }
-
-    .tagline{
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .glowline{
-      width: 160px;
-      height: 2px;
-      margin: 22px auto 0;
-      background: linear-gradient(90deg, transparent, var(--accent2), var(--accent), transparent);
-      filter: drop-shadow(0 0 10px rgba(93,224,255,.25));
-      opacity:.95;
-    }
-
-    /* bottom nav links */
-    .bottom-nav{
-      position:absolute;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      z-index:2;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:center;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.35);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-    }
-
-    .bottom-nav a{
-      text-decoration:none;
-      color: var(--text);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      transition: .2s ease;
-    }
-
-    .bottom-nav a:hover{
-      transform: translateY(-1px);
-      border-color: rgba(93,224,255,.35);
-      box-shadow: 0 0 24px rgba(93,224,255,.12);
-    }
-
-    /* SECTIONS */
-    .wrap{
-      width:min(1000px, 92vw);
-      margin: 0 auto;
-      padding: 64px 0 90px;
-    }
-
-    .section{
-      margin: 18px 0;
-      padding: 22px 18px;
-      border-radius: 22px;
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,.08);
-      box-shadow: 0 18px 50px rgba(0,0,0,.35);
-    }
-
-    .section h2{
-      margin:0 0 10px;
-      font-size: 18px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #dfe3ff;
-    }
-
-    .section p{
-      margin: 0 0 12px;
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 15px;
-      white-space: pre-line;
-    }
-
-    .rows{
-      display:grid;
-      gap:10px;
-      margin-top: 10px;
-    }
-
-    .row{
-      display:flex;
-      justify-content:space-between;
-      gap:14px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-    }
-
-    .k{color:#dfe3ff;font-weight:650}
-    .v{color:var(--muted)}
-
-    .link-buttons{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top: 10px;
-    }
-    .btn{
-      display:inline-block;
-      text-decoration:none;
-      color: var(--text);
-      padding: 11px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      transition: .2s ease;
-      font-weight:600;
-      font-size:14px;
-    }
-    .btn:hover{
-      border-color: rgba(138,162,255,.35);
-      box-shadow: 0 0 22px rgba(138,162,255,.10);
-      transform: translateY(-1px);
-    }
-
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 12px;
-    }
-    @media (max-width: 900px){
-      .gallery{grid-template-columns: 1fr 1fr;}
-    }
-    @media (max-width: 520px){
-      .gallery{grid-template-columns: 1fr;}
-    }
-    .gallery img{
-      width:100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.25);
-    }
-
-    footer{
-      margin-top: 18px;
-      text-align:center;
-      color: rgba(255,255,255,.45);
-      font-size: 12px;
-      padding: 20px 0 0;
-    }
-  </style>
 </head>
 
 <body>
 
-  <!-- HOME -->
-  <main id="home" class="hero">
-    <div class="hero-inner">
-      <h1>MOONRABBIT</h1>
-      <div class="tagline">THE RABBIT WAITS</div>
-      <div class="glowline"></div>
-    </div>
-
-    <nav class="bottom-nav" aria-label="Primary">
+<section class="hero">
+  <div class="hero-inner">
+    <h1>MoonRabbit</h1>
+    <p>THE RABBIT WAITS</p>
+    <div class="nav">
       <a href="#lore">Lore</a>
       <a href="#tokenomics">Tokenomics</a>
       <a href="#links">Links</a>
       <a href="#gallery">Gallery</a>
-    </nav>
-  </main>
+    </div>
+  </div>
+</section>
 
-  <div class="wrap">
-
-    <!-- LORE -->
-  <section id="lore" class="section">
-  <h2 class="neon-title">LORE</h2>
-
-  <img src="lore.jpg" alt="Moon Rabbit lore"
-       style="
-         width:100%;
-         max-height:420px;
-         object-fit:cover;
-         border-radius:18px;
-         margin:14px 0 18px;
-         border:1px solid rgba(255,255,255,.12);
-       ">
-
+<section id="lore" class="section">
+  <h2>Lore</h2>
+  <img src="lore.jpg" alt="Moon Rabbit lore">
   <p>
-In ancient stories across Japan, China, and Korea,
-the Moon is said to hold the image of a rabbit.
-
-Not a warrior.
-Not a ruler.
-
-A quiet figure seen by many,
-across cultures,
-across centuries.
-
-One of the oldest tales tells of a divine being
-who descended to Earth disguised as a beggar.
-
-Three animals were asked for food.
-
-The fox and the monkey offered what they could.
-The rabbit had nothing.
-
-So the rabbit did the only thing it could do —
-it offered itself.
-
-Moved by this act of sacrifice,
-the divine being spared the rabbit
-and carried it to the Moon,
-placing its image there forever.
-
-A symbol visible to all.
-
-Patience.
-Sacrifice.
-Consistency.
-
-The Moon Rabbit does not rush.
-It waits.
+    In ancient stories across Japan, China, and Korea, the Moon is said to hold the image of a rabbit.
+    Not a warrior. Not a ruler. A quiet figure seen by many, across cultures and centuries.
+  </p>
+  <p>
+    One of the oldest tales tells of a divine being who descended to Earth disguised as a beggar.
+    When the rabbit had nothing to offer, it offered itself.
+    Moved by this act, the divine being spared the rabbit and carried it to the Moon.
+  </p>
+  <p>
+    Patience. Sacrifice. Consistency.
+    The Moon Rabbit does not rush.
+    It waits.
   </p>
 </section>
 
-    <!-- TOKENOMICS -->
-    <section id="tokenomics" class="section">
-      <h2>Tokenomics</h2>
-      <div class="rows">
-        <div class="row"><div class="k">Chain</div><div class="v">Solana</div></div>
-        <div class="row"><div class="k">Launch</div><div class="v">Moonsend</div></div>
-        <div class="row"><div class="k">Ticker</div><div class="v">$MRABBIT</div></div>
-        <div class="row"><div class="k">Total Supply</div><div class="v">TBA</div></div>
-        <div class="row"><div class="k">Tax</div><div class="v">0 / 0</div></div>
-        <div class="row"><div class="k">Mint / Freeze</div><div class="v">TBA</div></div>
-      </div>
-    </section>
-
-    <!-- LINKS -->
-    <section id="links" class="section">
-      <h2>Links</h2>
-      <div class="link-buttons">
-        <!-- Replace the # with your real links -->
-        <a class="btn" href="#" target="_blank" rel="noreferrer">X</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">Telegram</a>
-        <a class="btn" href="#" target="_blank" rel="noreferrer">Moonsend</a>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="section">
-      <h2>Gallery</h2>
-      <p>Add your best visuals here. Keep it curated.</p>
-
-      <!-- Upload these images to your repo with the same filenames -->
-      <div class="gallery">
-        <img src="g1.jpg" alt="Moon Rabbit gallery 1">
-        <img src="g2.jpg" alt="Moon Rabbit gallery 2">
-        <img src="g3.jpg" alt="Moon Rabbit gallery 3">
-        <img src="g4.jpg" alt="Moon Rabbit gallery 4">
-        <img src="g5.jpg" alt="Moon Rabbit gallery 5">
-        <img src="g6.jpg" alt="Moon Rabbit gallery 6">
-      </div>
-    </section>
-
-    <footer>
-      Moon Rabbit is a community meme project. Nothing here is financial advice.
-    </footer>
+<section id="tokenomics" class="section">
+  <h2>Tokenomics</h2>
+  <div class="token-grid">
+    <div class="token-item">Chain: Solana</div>
+    <div class="token-item">Launch: Moonsend</div>
+    <div class="token-item">Ticker: $MRABBIT</div>
+    <div class="token-item">Total Supply: TBA</div>
+    <div class="token-item">Tax: 0 / 0</div>
+    <div class="token-item">Mint / Freeze: Revoked</div>
   </div>
+</section>
+
+<section id="links" class="section">
+  <h2>Links</h2>
+  <div class="links">
+    <a href="#">X / Twitter</a>
+    <a href="#">Telegram</a>
+    <a href="#">Moonsend</a>
+  </div>
+</section>
+
+<section id="gallery" class="section">
+  <h2>Gallery</h2>
+  <div class="gallery">
+    <img src="gallery1.jpg">
+    <img src="gallery2.jpg">
+    <img src="gallery3.jpg">
+    <img src="gallery4.jpg">
+  </div>
+</section>
+
+<footer>
+  Moon Rabbit is a community meme project. Nothing here is financial advice.
+</footer>
 
 </body>
 </html>
